@@ -27,7 +27,7 @@ def download_model(url, output_path):
     config_name="download",
 )
 def download(cfg: DictConfig) -> None:
-    model_name = "vit_h" # default segmentation model used in CNOS
+    model_name = "vit_l" # default segmentation model used in CNOS
     save_dir = osp.join(cfg.machine.root_dir, "pretrained/segment-anything")
     os.makedirs(save_dir, exist_ok=True)
     download_model(model_dict[model_name], save_dir)
