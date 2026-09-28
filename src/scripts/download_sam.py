@@ -12,7 +12,7 @@ model_dict = {
         "vit_h": "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth",  # 2560 MB
         "vit_l": "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth",  # 1250  MB
         "vit_b": "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth",
-    }  # 375 GB
+    }  # 375 MB
 
 def download_model(url, output_path):
     import os
@@ -27,7 +27,7 @@ def download_model(url, output_path):
     config_name="download",
 )
 def download(cfg: DictConfig) -> None:
-    model_name = "vit_l" # default segmentation model used in CNOS
+    model_name = "vit_b" # default segmentation model used in CNOS
     save_dir = osp.join(cfg.machine.root_dir, "pretrained/segment-anything")
     os.makedirs(save_dir, exist_ok=True)
     download_model(model_dict[model_name], save_dir)

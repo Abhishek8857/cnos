@@ -149,7 +149,7 @@ def run_inference(template_dir, rgb_path, num_max_dets, conf_threshold, stabilit
     detections.save_to_file(0, 0, 0, save_path, "custom", return_results=False)
     detections = convert_npz_to_json(idx=0, list_npz_paths=[save_path+".npz"])
     save_json_bop23(save_path+".json", detections)
-    vis_img = visualize(rgb, detections)
+    vis_img = visualize(rgb, detections[0])
     vis_img.save(f"{template_dir}/cnos_results/vis.png")
     
 if __name__ == "__main__":

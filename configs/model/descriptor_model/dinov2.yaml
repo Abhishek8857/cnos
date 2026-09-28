@@ -2,8 +2,9 @@
   model_name: dinov2_vitl14
   model: 
     _target_: torch.hub.load
-    repo_or_dir: facebookresearch/dinov2
+    repo_or_dir: /root/dinov2
     model: ${model.descriptor_model.model_name}
+    source: local
   token_name: x_norm_clstoken
   descriptor_width_size: ${model.descriptor_width_size}
   image_size: 224

@@ -174,3 +174,7 @@ cython_debug/
 # Model Checkpoints
 **/**.pth
 **/**.pt
+**/**.png
+**/**.json
+**/**.npz
+**/**.jpg
