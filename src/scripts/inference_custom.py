@@ -25,6 +25,7 @@ from src.model.loss import Similarity
 from src.utils.inout import save_json_bop23
 import cv2
 import distinctipy
+import json
 from skimage.feature import canny
 from skimage.morphology import binary_dilation
 from segment_anything.utils.amg import rle_to_mask
@@ -97,7 +98,7 @@ def run_inference(template_dir, rgb_path, num_max_dets, conf_threshold, stabilit
         
     
     logging.info("Initializing template")
-    template_paths = glob.glob(f"{template_dir}/*.png")
+    template_paths = glob.glob(f"{template_dir}/renders/*.png")
     boxes, templates = [], []
     for path in template_paths:
         image = Image.open(path)
@@ -151,6 +152,16 @@ def run_inference(template_dir, rgb_path, num_max_dets, conf_threshold, stabilit
     save_json_bop23(save_path+".json", detections)
     vis_img = visualize(rgb, detections[0])
     vis_img.save(f"{template_dir}/cnos_results/vis.png")
+    
+    # Save a segmap
+    with open(f'{template_dir}/cnos_results/detection.json') as f:
+        detections = json.load(f)[0]
+
+    for det in detections:
+        mask = rle_to_mask(det['segmentation'])
+        seg_img = (mask * 255).astype(np.uint8)
+        Image.fromarray(seg_img).save(f'{template_dir}/cnos_results/segmap.png')
+        
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

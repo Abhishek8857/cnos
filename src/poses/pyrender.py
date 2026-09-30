@@ -56,7 +56,7 @@ def render(
         scene.set_pose(cad_node, obj_poses[idx_frame] @ re_center_transform)
         rgb, depth = render_engine.render(scene, pyrender.constants.RenderFlags.RGBA)
         rgb = Image.fromarray(np.uint8(rgb))
-        rgb.save(osp.join(output_dir, f"{idx_frame:06d}.png"))
+        rgb.save(osp.join(output_dir, "renders", f"{idx_frame:06d}.png"))
 
 
 if __name__ == "__main__":
